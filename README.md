@@ -43,7 +43,7 @@ dotnet run --project ProjectName.App
 - Update this README with build/run instructions specific to your project.
 
 ## UML Diagram
-- https://etsu365-my.sharepoint.com/:i:/g/personal/gutierrezver_etsu_edu/IQBtF4SfdykqTbcx9nQU43vMAYxz1bPEioO1JssmCUYZZQg?e=9UPo7s
+- 
 
 ## Build and run Project
 - To build and run this project, you will need to us this code:

@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WarGame",
+    "\\WarGame\\WarGame.Console",
+    "\\WarGame\\WarGame.Core"
   ],
+  "SelectedNode": "\\WarGame\\WarGame.Core\\Hand.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -2,35 +2,36 @@
 
 public class WarGameEngine
 {
-    // A dictionary to hold each player's hand of cards.
-    // The key is the player's name, and the value is a queue of cards representing their hand.
-    private Dictionary<string, Queue<Card>> playerHands = new();
+    // We can represent the game state with a dictionary mapping player names to their hands
+    private Dictionary<string, Hand> playerHands = new();
     private List<Card> pot = new();
     private int roundCount = 0;
     private const int MAX_ROUNDS = 10000;
 
-    
+    // The constructor initializes the game by creating a deck,
+    // shuffling it, and dealing the cards to the players in a round-robin fashion.
     public WarGameEngine(List<string> players)
     {
         Deck deck = new Deck();
 
+        
         foreach (var player in players)
         {
-            playerHands[player] = new Queue<Card>();
+            playerHands[player] = new Hand();
         }
-
-        // Deal cards to players in a round-robin fashion until the deck is empty.
+        
+        // Round-robin dealing
         int i = 0;
         while (deck.Count > 0)
         {
             var player = players[i % players.Count];
-            playerHands[player].Enqueue(deck.Draw());
+            playerHands[player].AddCard(deck.Draw());
             i++;
         }
     }
 
-    // The main game loop that continues until there is only one player left
-    // or the maximum number of rounds is reached.
+    // The PlayGame method contains the main game loop, which continues until only one player
+    // remains or a maximum number of rounds is reached to prevent infinite loops.
     public void PlayGame()
     {
         while (playerHands.Count > 1 && roundCount < MAX_ROUNDS)
@@ -39,36 +40,42 @@ public class WarGameEngine
             Console.WriteLine($"\n--- Round {roundCount} ---");
 
             PlayRound();
-            RemoveEliminatedPlayers();
             PrintCardCounts();
         }
 
         DeclareWinner();
     }
 
-    // This method handles the logic for playing a single round of the game.
+    // The PlayRound method handles the logic for each round of the game.
+    // It checks for immediate elimination
     private void PlayRound()
     {
         var played = new Dictionary<string, Card>();
 
+        // Immediate elimination check
         foreach (var player in playerHands.Keys.ToList())
         {
-            if (playerHands[player].Count > 0)
+            if (playerHands[player].Count == 0)
             {
-                var card = playerHands[player].Dequeue();
-                played[player] = card;
-                pot.Add(card);
-
-                Console.WriteLine($"{player}: {card}");
+                Console.WriteLine($"{player} eliminated!");
+                playerHands.Remove(player);
+                continue;
             }
+
+            var card = playerHands[player].PlayCard();
+            played[player] = card;
+            pot.Add(card);
+
+            Console.WriteLine($"{player}: {card}");
         }
 
-        Console.WriteLine("Pot includes: " + string.Join(", ", pot));
+        Console.WriteLine("Pot: " + string.Join(", ", pot));
 
         ResolveRound(played);
     }
 
-    // This method determines the winner of the round based on the cards played.
+    // The ResolveRound method determines the winner of the round
+    // by comparing the ranks of the played cards.
     private void ResolveRound(Dictionary<string, Card> played)
     {
         int maxRank = played.Values.Max(c => c.Rank);
@@ -85,13 +92,12 @@ public class WarGameEngine
         else
         {
             Console.WriteLine("Tie between: " + string.Join(", ", winners));
-            Console.WriteLine("WAR!");
-
             HandleWar(winners);
         }
     }
 
-    // This method handles the "WAR" scenario when there is a tie between players.
+    // The HandleWar method manages the "war" scenario when
+    // multiple players tie with the same rank.
     private void HandleWar(List<string> tiedPlayers)
     {
         var warCards = new Dictionary<string, Card>();
@@ -100,12 +106,12 @@ public class WarGameEngine
         {
             if (playerHands[player].Count == 0)
             {
-                Console.WriteLine($"{player} eliminated (no cards for WAR)");
+                Console.WriteLine($"{player} eliminated during WAR!");
                 tiedPlayers.Remove(player);
                 continue;
             }
 
-            var card = playerHands[player].Dequeue();
+            var card = playerHands[player].PlayCard();
             warCards[player] = card;
             pot.Add(card);
 
@@ -123,34 +129,17 @@ public class WarGameEngine
         ResolveRound(warCards);
     }
 
-    // This method awards the pot of cards to the winner of the round.
+    // The AwardPot method gives all the cards in the pot to the winning player
+    // and clears the pot for the next round.
     private void AwardPot(string winner)
     {
-        Console.WriteLine($"{winner} wins the round and takes {pot.Count} cards!");
+        Console.WriteLine($"{winner} wins {pot.Count} cards!");
 
-        foreach (var card in pot)
-        {
-            playerHands[winner].Enqueue(card);
-        }
-
+        playerHands[winner].AddCards(pot);
         pot.Clear();
     }
 
-    
-    private void RemoveEliminatedPlayers()
-    {
-        var eliminated = playerHands
-            .Where(p => p.Value.Count == 0)
-            .Select(p => p.Key)
-            .ToList();
-
-        foreach (var player in eliminated)
-        {
-            Console.WriteLine($"{player} is eliminated!");
-            playerHands.Remove(player);
-        }
-    }
-
+    // The PrintCardCounts method displays the number of cards each player has after each round
     private void PrintCardCounts()
     {
         Console.WriteLine("Card counts:");
@@ -160,28 +149,30 @@ public class WarGameEngine
         }
     }
 
-    // Declares the winner based on who has the most cards at the end or all the cards or
-    // if the round limit is reached.
+    // The DeclareWinner method announces the winner of the game when only one player remains
     private void DeclareWinner()
     {
         if (playerHands.Count == 1)
         {
             Console.WriteLine($"\n Winner: {playerHands.Keys.First()}");
+            return;
+        }
+
+        Console.WriteLine("\nReached round limit!");
+
+        int maxCards = playerHands.Max(p => p.Value.Count);
+
+        var winners = playerHands
+            .Where(p => p.Value.Count == maxCards)
+            .ToList();
+
+        if (winners.Count > 1)
+        {
+            Console.WriteLine("Game is a DRAW!");
         }
         else
         {
-            Console.WriteLine("\nReached round limit!");
-
-            var winner = playerHands
-                .OrderByDescending(p => p.Value.Count)
-                .First();
-
-            Console.WriteLine($"Winner by card count: {winner.Key}");
-
-            if (playerHands.Values.Select(p => p.Count).Distinct().Count() == 1)
-            {
-                Console.WriteLine("Game is a DRAW!");
-            }
+            Console.WriteLine($"Winner: {winners[0].Key}");
         }
     }
 }
