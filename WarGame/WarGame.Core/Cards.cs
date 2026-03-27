@@ -3,24 +3,39 @@
 
 public class Card : IComparable<Card>
 {
+<<<<<<< HEAD
    
     public string Suit { get; set; }
     public int Rank { get; set; } // 2–14 (Ace = 14)
 
     // Constructor to initialize the card with a suit and rank.
+=======
+    public string Suit { get; set; }
+    public int Rank { get; set; } // 2–14 (Ace = 14)
+
+    
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     public Card(string suit, int rank)
     {
         Suit = suit;
         Rank = rank;
     }
 
+<<<<<<< HEAD
     // CompareTo method to compare cards based on their rank.
+=======
+   
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     public int CompareTo(Card other)
     {
         return Rank.CompareTo(other.Rank);
     }
 
+<<<<<<< HEAD
     // Override ToString to provide a readable representation of the card.
+=======
+    
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     public override string ToString()
     {
         return Rank switch

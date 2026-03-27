@@ -2,14 +2,21 @@
 
 public class WarGameEngine
 {
+<<<<<<< HEAD
     // A dictionary to hold each player's hand of cards.
     // The key is the player's name, and the value is a queue of cards representing their hand.
+=======
+      
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private Dictionary<string, Queue<Card>> playerHands = new();
     private List<Card> pot = new();
     private int roundCount = 0;
     private const int MAX_ROUNDS = 10000;
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     public WarGameEngine(List<string> players)
     {
         Deck deck = new Deck();
@@ -19,7 +26,11 @@ public class WarGameEngine
             playerHands[player] = new Queue<Card>();
         }
 
+<<<<<<< HEAD
         // Deal cards to players in a round-robin fashion until the deck is empty.
+=======
+        // Round-robin dealing
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
         int i = 0;
         while (deck.Count > 0)
         {
@@ -29,8 +40,11 @@ public class WarGameEngine
         }
     }
 
+<<<<<<< HEAD
     // The main game loop that continues until there is only one player left
     // or the maximum number of rounds is reached.
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     public void PlayGame()
     {
         while (playerHands.Count > 1 && roundCount < MAX_ROUNDS)
@@ -46,7 +60,10 @@ public class WarGameEngine
         DeclareWinner();
     }
 
+<<<<<<< HEAD
     // This method handles the logic for playing a single round of the game.
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void PlayRound()
     {
         var played = new Dictionary<string, Card>();
@@ -68,7 +85,10 @@ public class WarGameEngine
         ResolveRound(played);
     }
 
+<<<<<<< HEAD
     // This method determines the winner of the round based on the cards played.
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void ResolveRound(Dictionary<string, Card> played)
     {
         int maxRank = played.Values.Max(c => c.Rank);
@@ -91,7 +111,10 @@ public class WarGameEngine
         }
     }
 
+<<<<<<< HEAD
     // This method handles the "WAR" scenario when there is a tie between players.
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void HandleWar(List<string> tiedPlayers)
     {
         var warCards = new Dictionary<string, Card>();
@@ -123,7 +146,10 @@ public class WarGameEngine
         ResolveRound(warCards);
     }
 
+<<<<<<< HEAD
     // This method awards the pot of cards to the winner of the round.
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void AwardPot(string winner)
     {
         Console.WriteLine($"{winner} wins the round and takes {pot.Count} cards!");
@@ -136,7 +162,10 @@ public class WarGameEngine
         pot.Clear();
     }
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void RemoveEliminatedPlayers()
     {
         var eliminated = playerHands
@@ -160,8 +189,12 @@ public class WarGameEngine
         }
     }
 
+<<<<<<< HEAD
     // Declares the winner based on who has the most cards at the end or all the cards or
     // if the round limit is reached.
+=======
+    
+>>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
     private void DeclareWinner()
     {
         if (playerHands.Count == 1)
