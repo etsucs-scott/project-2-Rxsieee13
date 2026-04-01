@@ -7,9 +7,25 @@ public class Deck
 
     public Deck()
     {
+<<<<<<< HEAD
         InitializeDeck();
         Shuffle();
     }
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        InitializeDeck();
+        Shuffle();
+=======
+<<<<<<< HEAD
+        InitializeDeck();
+        Shuffle();
+=======
+<<<<<<< HEAD
+        /// A stack to hold the cards in the deck. The top of the stack is the next card to draw.
+        private Stack<Card> cards = new Stack<Card>();
+        private static Random rand = new Random();
+>>>>>>> f0074299dc0d5d4d2dfd1fb53eb6c8f1a182e272
 
         private void InitializeDeck()
         {
@@ -45,7 +61,17 @@ public class Deck
         }
 
         public int Count => cards.Count;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
+>>>>>>> origin/main
+=======
+        InitializeDeck();
+        Shuffle();
+>>>>>>> WarGame
+    }
+>>>>>>> f0074299dc0d5d4d2dfd1fb53eb6c8f1a182e272
 
     private void InitializeDeck()
     {
