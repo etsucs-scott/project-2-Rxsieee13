@@ -6,6 +6,7 @@ class Program
     static void Main(string[] args)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         int numPlayers;
 
 =======
@@ -13,6 +14,10 @@ class Program
         int numPlayers;
         // Prompt the user for the number of players, ensuring it's between 2 and 4.
 >>>>>>> origin/main
+=======
+        int numPlayers;
+
+>>>>>>> WarGame
         do
         {
             Console.Write("Enter number of players (2-4): ");
@@ -21,6 +26,7 @@ class Program
 
         var players = new List<string>();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -39,6 +45,8 @@ class Program
 >>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+>>>>>>> WarGame
         for (int i = 1; i <= numPlayers; i++)
         {
             players.Add($"Player {i}");

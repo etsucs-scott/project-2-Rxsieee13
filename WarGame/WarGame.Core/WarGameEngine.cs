@@ -3,6 +3,7 @@
 public class WarGameEngine
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // A dictionary to hold each player's hand of cards.
     // The key is the player's name, and the value is a queue of cards representing their hand.
@@ -102,6 +103,36 @@ public class WarGameEngine
             PlayRound();
             PrintCardCounts();
 >>>>>>> origin/main
+=======
+
+    // A dictionary to hold each player's hand of cards.
+    // The key is the player's name, and the value is a queue of cards representing their hand.
+
+        private Dictionary<string, Hand> playerHands = new();
+        private List<Cards> pot = new();
+        private int roundCount = 0;
+        private const int MAX_ROUNDS = 10000;
+
+    // The constructor initializes the game
+    // by creating a deck of cards, shuffling it, and dealing it to the players in a round-robin fashion.
+    public WarGameEngine(List<string> players)
+        {
+            Deck deck = new Deck();
+
+            foreach (var player in players)
+            {
+                playerHands[player] = new Hand();
+            }
+
+            // Round-robin dealing
+            int i = 0;
+            while (deck.Count > 0)
+            {
+                var player = players[i % players.Count];
+                playerHands[player].AddCard(deck.Draw());
+                i++;
+            }
+>>>>>>> WarGame
         }
 
     
@@ -111,6 +142,7 @@ public class WarGameEngine
             {
                 roundCount++;
                 Console.WriteLine($"\n--- Round {roundCount} ---");
+<<<<<<< HEAD
 
                 PlayRound();
                 PrintCardCounts();
@@ -132,6 +164,17 @@ public class WarGameEngine
 >>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+
+                PlayRound();
+                PrintCardCounts();
+            }
+
+            DeclareWinner();
+        }
+
+    // The PlayRound method handles the logic for each round of the game.
+>>>>>>> WarGame
     private void PlayRound()
         {
             var played = new Dictionary<string, Cards>();
@@ -158,6 +201,7 @@ public class WarGameEngine
             ResolveRound(played);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     // The ResolveRound method determines the winner of the round based on the cards played.
     private void ResolveRound(Dictionary<string, Cards> played)
@@ -191,6 +235,13 @@ public class WarGameEngine
             int maxRank = played.Values.Max(c => c.Rank);
 
 <<<<<<< HEAD
+=======
+    // The ResolveRound method determines the winner of the round based on the cards played.
+    private void ResolveRound(Dictionary<string, Cards> played)
+        {
+            int maxRank = played.Values.Max(c => c.Rank);
+
+>>>>>>> WarGame
             var winners = played
                 .Where(p => p.Value.Rank == maxRank)
                 .Select(p => p.Key)
@@ -208,6 +259,7 @@ public class WarGameEngine
         }
 
     // The HandleWar method manages the "war" scenario when multiple players tie with the same rank.
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
     // The HandleWar method manages the "war" scenario when
@@ -219,6 +271,8 @@ public class WarGameEngine
 >>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+>>>>>>> WarGame
     private void HandleWar(List<string> tiedPlayers)
         {
             var warCards = new Dictionary<string, Cards>();
@@ -250,6 +304,7 @@ public class WarGameEngine
             ResolveRound(warCards);
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     // The AwardPot method gives all the cards in the pot
     // to the winning player and clears the pot for the next round.
@@ -303,15 +358,26 @@ public class WarGameEngine
             Console.WriteLine($"{winner} wins {pot.Count} cards!");
 
 <<<<<<< HEAD
+=======
+    // The AwardPot method gives all the cards in the pot
+    // to the winning player and clears the pot for the next round.
+    private void AwardPot(string winner)
+        {
+            Console.WriteLine($"{winner} wins {pot.Count} cards!");
+
+>>>>>>> WarGame
             playerHands[winner].AddCards(pot);
             pot.Clear();
         }
 
     // The PrintCardCounts method displays the number of cards each player has after each round,
     // which helps track the game's progress.
+<<<<<<< HEAD
 =======
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+>>>>>>> WarGame
     private void PrintCardCounts()
         {
             Console.WriteLine("Card counts:");
@@ -321,6 +387,7 @@ public class WarGameEngine
             }
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     // The DeclareWinner method determines and announces the winner of the game once it concludes
 =======
@@ -335,6 +402,9 @@ public class WarGameEngine
 >>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+    // The DeclareWinner method determines and announces the winner of the game once it concludes
+>>>>>>> WarGame
     private void DeclareWinner()
         {
             if (playerHands.Count == 1)

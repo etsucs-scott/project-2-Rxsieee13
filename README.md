@@ -54,4 +54,14 @@ dotnet run --project ProjectName.App
 - This project is a card game called War.
 - You can play against multiple players by typing how many players you want to play. 
 - This ranging from 2-4 players.
-- - The game will continue until there is a winner or if you reach the maximun number of rounds which is 10,000.
+- The game will continue until there is a winner or if you reach the maximun number of rounds which is 10,000.
+
+# Game Rules
+- Each player plays one card per round
+- Highest card wins all cards in the pot
+- If players tie, a WAR occurs: Tied players draw additional cards and Highest card wins the entire pot
+- Players are eliminated immediately when they run out of cards
+- Game ends when: One player remains or Maximum round limit is reached
+
+# Submission Note
+- https://github.com/etsucs-scott/project-2-Rxsieee13.git

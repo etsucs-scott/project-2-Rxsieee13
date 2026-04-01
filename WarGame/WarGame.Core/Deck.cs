@@ -8,6 +8,7 @@ public class Deck
     public Deck()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         InitializeDeck();
         Shuffle();
 =======
@@ -79,6 +80,10 @@ public class Deck
         public int Count => cards.Count;
 >>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
 >>>>>>> origin/main
+=======
+        InitializeDeck();
+        Shuffle();
+>>>>>>> WarGame
     }
 
     private void InitializeDeck()
