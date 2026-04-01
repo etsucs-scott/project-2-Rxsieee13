@@ -7,35 +7,10 @@ public class Deck
 
     public Deck()
     {
-<<<<<<< HEAD
         InitializeDeck();
         Shuffle();
-=======
-<<<<<<< HEAD
-        InitializeDeck();
-        Shuffle();
-=======
-<<<<<<< HEAD
-        /// A stack to hold the cards in the deck. The top of the stack is the next card to draw.
-        private Stack<Card> cards = new Stack<Card>();
-        private static Random rand = new Random();
+    }
 
-        /// Constructor to initialize the deck with 52 cards and shuffle it.
-=======
-        private Stack<Card> cards = new Stack<Card>();
-        private static Random rand = new Random();
-
->>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
-        public Deck()
-        {
-            InitializeDeck();
-            Shuffle();
-        }
-
-<<<<<<< HEAD
-        // Method to initialize the deck with 52 standard playing cards.
-=======
->>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
         private void InitializeDeck()
         {
             string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
@@ -44,18 +19,14 @@ public class Deck
             {
                 for (int rank = 2; rank <= 14; rank++)
                 {
-                    cards.Push(new Card(suit, rank));
+                    cards.Push(new Cards(suit, rank));
                 }
             }
         }
 
-<<<<<<< HEAD
-        
-=======
->>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
         public void Shuffle()
         {
-            var list = new List<Card>(cards);
+            var list = new List<Cards>(cards);
             cards.Clear();
 
             while (list.Count > 0)
@@ -66,20 +37,15 @@ public class Deck
             }
         }
 
-<<<<<<< HEAD
         // Method to draw a card from the top of the deck. Returns null if the deck is empty.
-=======
-        
->>>>>>> 0ddcdb0cb3e5cb6c268449a692ecd3b038e994c1
-        public Card Draw()
+
+        public Cards Draw()
         {
             return cards.Pop();
         }
 
         public int Count => cards.Count;
->>>>>>> ed1c0a656273cacbe0efea33f832b2bdf9742309
->>>>>>> origin/main
-    }
+
 
     private void InitializeDeck()
     {
