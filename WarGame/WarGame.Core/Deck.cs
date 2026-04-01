@@ -2,15 +2,18 @@
 
 public class Deck
 {
+    // We use a Stack to represent the deck, as it allows us to easily draw cards from the top.
     private Stack<Cards> cards = new Stack<Cards>();
     private static Random rand = new Random();
 
+    // The constructor initializes the deck with 52 cards and shuffles it.
     public Deck()
     {
         InitializeDeck();
         Shuffle();
     }
 
+    // This method initializes the deck with 52 standard playing cards.
     private void InitializeDeck()
     {
         string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
@@ -24,6 +27,7 @@ public class Deck
         }
     }
 
+    // This method shuffles the deck using the Fisher-Yates algorithm.
     public void Shuffle()
     {
         var list = new List<Cards>(cards);
@@ -37,14 +41,12 @@ public class Deck
         }
     }
 
-    // Method to draw a card from the top of the deck. Returns null if the deck is empty.
-
+    // This method draws a card from the top of the deck.
+    // If the deck is empty, it throws an exception.
     public Cards Draw()
     {
         return cards.Pop();
     }
 
     public int Count => cards.Count;
-
-
 }

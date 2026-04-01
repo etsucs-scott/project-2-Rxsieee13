@@ -1,33 +1,31 @@
 ﻿namespace WarGame.Core;
 
-
 public class Hand
-    {
-    // We can represent a player's hand as a queue of cards,
-    // where they play from the front and add to the back.
+{
+    // We use a Queue to represent the player's hand,
+    // as it allows us to easily add cards to the back and play cards from the front.
     private Queue<Cards> cards = new Queue<Cards>();
 
-        public int Count => cards.Count;
+    public int Count => cards.Count;
 
-    // This method adds a single card to the player's hand.
+    // Adds a single card to the player's hand.
     public void AddCard(Cards card)
+    {
+        cards.Enqueue(card);
+    }
+
+    // Adds multiple cards to the player's hand.
+    public void AddCards(List<Cards> newCards)
+    {
+        foreach (var card in newCards)
         {
             cards.Enqueue(card);
         }
-
-    // This method adds multiple cards to the player's hand,
-    // which is useful when a player wins a round and collects cards.
-    public void AddCards(List<Cards> newCards)
-        {
-            foreach (var card in newCards)
-            {
-                cards.Enqueue(card);
-            }
-        }
-
-    // This method plays a card from the front of the hand.
-    public Cards PlayCard()
-        {
-            return cards.Count > 0 ? cards.Dequeue() : null;
-        }
     }
+
+    // Plays a card from the player's hand. Returns null if the hand is empty.
+    public Cards PlayCard()
+    {
+        return cards.Count > 0 ? cards.Dequeue() : null;
+    }
+}

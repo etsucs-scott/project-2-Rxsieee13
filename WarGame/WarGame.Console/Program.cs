@@ -5,8 +5,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Prompt the user for the number of players, ensuring it's between 2 and 4.
         int numPlayers;
+        // Prompt the user for the number of players (2-4) and validate input
         do
         {
             Console.Write("Enter number of players (2-4): ");
