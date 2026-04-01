@@ -1,26 +1,34 @@
 ﻿namespace WarGame.Core;
 
 
-public class Card : IComparable<Card>
+public class Cards : IComparable<Cards>
 {
 
     public string Suit { get; set; }
     public int Rank { get; set; } // 2–14
 
+
     //We can represent suits as strings and ranks as integers (2–14, where 11=J, 12=Q, 13=K, 14=A)
-    public Card(string suit, int rank)
+    // Constructor to initialize the card with a suit and rank.
+
+    public Cards(string suit, int rank)
     {
         Suit = suit;
         Rank = rank;
     }
 
+
     // Compare cards by rank for the War game
-    public int CompareTo(Card other)
+    // CompareTo method to compare cards based on their rank.
+
+    public int CompareTo(Cards other)
     {
         return Rank.CompareTo(other.Rank);
     }
 
-    // Override ToString for easy display
+
+    // Override ToString to provide a readable representation of the card.
+
     public override string ToString()
     {
         return Rank switch
